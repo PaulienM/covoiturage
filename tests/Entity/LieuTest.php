@@ -16,7 +16,7 @@ class LieuTest extends TestCase
     }
 
     public function testLieu(){
-        $this->assertInstanceOf(Lieu::class, $this->Lieu);
+        $this->assertInstanceOf(Lieu::class, $this->lieu);
         $this->assertNull($this->lieu->getId());
     }
 
