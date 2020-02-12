@@ -15,4 +15,11 @@ class UserTest extends testCase
         $this->assertInstanceOf(User::class, $user);
         $this->assertNull($user->getId());
     }
+
+    public function testUserNom()
+    {
+        $user = new User();
+        $user->setNom('patoche');
+        $this->assertEquals('patoche', $user->getNom());
+    }
 }
