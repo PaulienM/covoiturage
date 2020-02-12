@@ -44,4 +44,10 @@ class UserTest extends testCase
         $this->user->setPassword('motdepasse');
         $this->assertEquals('motdepasse', $this->user->getPassword());
     }
+
+    public function testUserEmail()
+    {
+        $this->user->setEmail('mail@test.com');
+        $this->assertEquals('mail@test.com', $this->user->getEmail());
+    }
 }
