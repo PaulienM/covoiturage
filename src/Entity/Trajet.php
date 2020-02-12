@@ -38,6 +38,16 @@ class Trajet
      */
     private $passagers;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $places;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $datetime;
+
     public function __construct()
     {
         $this->passagers = new ArrayCollection();
@@ -106,6 +116,30 @@ class Trajet
         if ($this->passagers->contains($passager)) {
             $this->passagers->removeElement($passager);
         }
+
+        return $this;
+    }
+
+    public function getPlaces(): ?string
+    {
+        return $this->places;
+    }
+
+    public function setPlaces(string $places): self
+    {
+        $this->places = $places;
+
+        return $this;
+    }
+
+    public function getDatetime(): ?\DateTimeInterface
+    {
+        return $this->datetime;
+    }
+
+    public function setDatetime(\DateTimeInterface $datetime): self
+    {
+        $this->datetime = $datetime;
 
         return $this;
     }
