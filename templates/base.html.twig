@@ -3,11 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="stylesheet" href="{{ asset('css/bootstrap-4/bootstrap.min.css')}}" />
+        <link href="{{ asset ("css/fontawsome-5.all.min.css")}}" rel="stylesheet" type="text/css">
+
+        <link rel="stylesheet" href="{{ asset('css/projet.css')}}" />
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-    {%  include 'navBar.html.twig' %}
-    {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {%  include 'navBar.html.twig' %}
+        {% block body %}{% endblock %}
+        {% block javascripts %}
+            <script src="{{ asset ("js/jquery/jquery.slim.min.js")}}"></script>
+            <script src="{{ asset ("js/bootstrap/bootstrap.min.js")}}"></script>
+        {% endblock %}
     </body>
+
 </html>

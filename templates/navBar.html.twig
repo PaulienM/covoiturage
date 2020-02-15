@@ -1,9 +1,15 @@
 
-
-        <nav>
-            <ul>
-                <li>
-                    <a class="nav-link" href="{{ path('login')}}">Inscription</a>
-                </li>
-            </ul>
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="{{ path('index')}}">
+                <i class="fas fa-home"></i> Biblicar.com</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse show" id="navbarsExampleDefault" style="">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('login')}}">Connexion</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
