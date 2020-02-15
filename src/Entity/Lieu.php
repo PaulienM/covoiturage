@@ -24,11 +24,6 @@ class Lieu
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Trajet", mappedBy="lieuArrivee")
-     */
-    private $trajets;
-
-    /**
      * @ORM\Column(type="float")
      */
     private $longitude;
@@ -38,9 +33,20 @@ class Lieu
      */
     private $latitude;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="lieudepart")
+     */
+    private $departtrajets;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="lieuarrivee")
+     */
+    private $arriveetrajets;
+
     public function __construct()
     {
-        $this->trajets = new ArrayCollection();
+        $this->departtrajets = new ArrayCollection();
+        $this->arriveetrajets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -60,37 +66,6 @@ class Lieu
         return $this;
     }
 
-    /**
-     * @return Collection|Trajet[]
-     */
-    public function getTrajets(): Collection
-    {
-        return $this->trajets;
-    }
-
-    public function addTrajet(Trajet $trajet): self
-    {
-        if (!$this->trajets->contains($trajet)) {
-            $this->trajets[] = $trajet;
-            $trajet->setLieuArrivee($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTrajet(Trajet $trajet): self
-    {
-        if ($this->trajets->contains($trajet)) {
-            $this->trajets->removeElement($trajet);
-            // set the owning side to null (unless already changed)
-            if ($trajet->getLieuArrivee() === $this) {
-                $trajet->setLieuArrivee(null);
-            }
-        }
-
-        return $this;
-    }
-
     public function getLongitude(): ?float
     {
         return $this->longitude;
@@ -101,6 +76,38 @@ class Lieu
         $this->longitude = $longitude;
 
         return $this;
+    }
+
+    public function getLatitude(): ?float
+    {
+        return $this->latitude;
+    }
+
+    public function setLatitude(float $latitude): self
+    {
+        $this->latitude = $latitude;
+
+        return $this;
+    }
+
+    public function getLieudepart(): ?self
+    {
+        return $this->lieudepart;
+    }
+
+    public function setLieudepart(?self $lieudepart): self
+    {
+        $this->lieudepart = $lieudepart;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|self[]
+     */
+    public function getDeparttrajets(): Collection
+    {
+        return $this->departtrajets;
     }
 
     public function addDeparttrajet(Trajet $departtrajet): self
@@ -126,14 +133,45 @@ class Lieu
         return $this;
     }
 
-    public function getLatitude(): ?float
+    public function getLieuarrivee(): ?self
     {
-        return $this->latitude;
+        return $this->lieuarrivee;
     }
 
-    public function setLatitude(float $latitude): self
+    public function setLieuarrivee(?self $lieuarrivee): self
     {
-        $this->latitude = $latitude;
+        $this->lieuarrivee = $lieuarrivee;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trajet[]
+     */
+    public function getArriveetrajets(): Collection
+    {
+        return $this->arriveetrajets;
+    }
+
+    public function addArriveetrajet(Trajet $arriveetrajet): self
+    {
+        if (!$this->arriveetrajets->contains($arriveetrajet)) {
+            $this->arriveetrajets[] = $arriveetrajet;
+            $arriveetrajet->setLieuarrivee($this);
+        }
+
+        return $this;
+    }
+
+    public function removeArriveetrajet(Trajet $arriveetrajet): self
+    {
+        if ($this->arriveetrajets->contains($arriveetrajet)) {
+            $this->arriveetrajets->removeElement($arriveetrajet);
+            // set the owning side to null (unless already changed)
+            if ($arriveetrajet->getLieuarrivee() === $this) {
+                $arriveetrajet->setLieuarrivee(null);
+            }
+        }
 
         return $this;
     }

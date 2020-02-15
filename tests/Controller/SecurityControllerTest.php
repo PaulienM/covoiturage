@@ -8,7 +8,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
 {
-/*    public function testLogin()
+    public function testLogin()
     {
         $client = self::createClient();
         $client->request('GET', '/login');
@@ -21,5 +21,5 @@ class SecurityControllerTest extends WebTestCase
         $client->followRedirects();
         $client->request('GET', '/logout');
         $this->assertEquals(200, $client->getResponse()->getStatusCode());
-    }*/
+    }
 }

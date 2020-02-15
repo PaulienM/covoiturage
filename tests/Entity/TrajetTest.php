@@ -29,4 +29,36 @@ class TrajetTest extends TestCase {
         $this->trajet->setDatetime($date);
         $this->assertEquals($date, $this->trajet->getDatetime());
     }
+
+    public function testTrajetLieuDepart() {
+        $lieu = new Lieu();
+        $this->trajet->setLieudepart($lieu);
+        $lieu->addDeparttrajet($this->trajet);
+        $this->assertEquals($lieu, $this->trajet->getLieuDepart());
+        $this->assertContains($this->trajet, $lieu->getDeparttrajets());
+    }
+
+    public function testTrajetLieuArrivee() {
+        $lieu = new Lieu();
+        $this->trajet->setLieuarrivee($lieu);
+        $lieu->addArriveetrajet($this->trajet);
+        $this->assertEquals($lieu, $this->trajet->getLieuarrivee());
+        $this->assertContains($this->trajet, $lieu->getArriveetrajets());
+    }
+
+    public function testTrajetConducteur() {
+        $user = new User();
+        $this->trajet->setConducteur($user);
+        $user->addConducteurtrajet($this->trajet);
+        $this->assertEquals($user, $this->trajet->getConducteur());
+        $this->assertContains($this->trajet, $user->getConducteurtrajets());
+    }
+
+    public function testTrajetPassager() {
+        $user = new User();
+        $this->trajet->addPassager($user);
+        $user->addPassagertrajet($this->trajet);
+        $this->assertContains($user, $this->trajet->getPassagers());
+        $this->assertContains($this->trajet, $user->getPassagertrajets());
+    }
 }
