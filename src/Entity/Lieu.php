@@ -103,14 +103,12 @@ class Lieu
         return $this;
     }
 
-    public function getLatitude(): ?float
+    public function addDeparttrajet(Trajet $departtrajet): self
     {
-        return $this->latitude;
-    }
-
-    public function setLatitude(float $latitude): self
-    {
-        $this->latitude = $latitude;
+        if (!$this->departtrajets->contains($departtrajet)) {
+            $this->departtrajets[] = $departtrajet;
+            $departtrajet->setLieudepart($this);
+        }
 
         return $this;
     }
@@ -128,13 +126,16 @@ class Lieu
         return $this;
     }
 
-    public function addDeparttrajet(Trajet $departtrajet): self
+    public function getLatitude(): ?float
     {
-        if (!$this->departtrajets->contains($departtrajet)) {
-            $this->departtrajets[] = $departtrajet;
-            $departtrajet->setLieudepart($this);
-        }
+        return $this->latitude;
+    }
+
+    public function setLatitude(float $latitude): self
+    {
+        $this->latitude = $latitude;
 
         return $this;
     }
+
 }
