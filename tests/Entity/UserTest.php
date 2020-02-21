@@ -10,6 +10,7 @@ use App\Entity\User;
 class UserTest extends testCase
 {
     protected $user;
+
     public function setUp()
     {
         $this->user = new User();
