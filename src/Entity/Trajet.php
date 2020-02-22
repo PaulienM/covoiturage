@@ -19,22 +19,22 @@ class Trajet
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\lieu", inversedBy="departtrajets")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="departtrajets")
      */
     private $lieuDepart;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\lieu", inversedBy="arriveetrajets")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="arriveetrajets")
      */
     private $lieuArrivee;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\user", inversedBy="conducteurtrajets")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="conducteurtrajets")
      */
     private $conducteur;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\user", inversedBy="passagertrajets")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="passagertrajets")
      */
     private $passagers;
 

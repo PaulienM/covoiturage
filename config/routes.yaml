@@ -9,4 +9,44 @@ app_login:
 app_logout:
   path: /logout
   controller: App\Controller\SecurityController::logout
-  methods: GET
+
+user_index:
+  path: /user_index
+  controller: App\Controller\UserController::index
+
+#users: /user/{idUser}
+#  path: /logout
+#  controller: App\Controller\SecurityController::users
+
+#user_show:
+#  path: /user_show/{id}
+#  controller: App\Controller\UserController::show
+
+#user_new:
+#  path: /user_new
+#  controller: App\Controller\UserController::new
+
+#user_create:
+#  path: /user_create
+#  controller: App\Controller\SecurityController::userCreate
+#  methods: GET
+
+#user_form
+#  path: /user_form
+#  controller: App\Controller\SecurityController::userForm
+#  methods: GET
+#
+#user_edit:
+#  path: /user_edit/{idUser}
+#  controller: App\Controller\SecurityController::userDelete
+#  methods: GET
+
+#user_update:
+#  path: /user_update
+#  controller: App\Controller\SecurityController::userDelete
+#  methods: GET
+#
+#user_delete:
+#  path: /user_delete/{idUser}
+#  controller: App\Controller\SecurityController::userDelete
+#  methods: GET
