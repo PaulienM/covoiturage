@@ -22,13 +22,13 @@ user_index:
 #  path: /user_show/{id}
 #  controller: App\Controller\UserController::show
 
-#user_new:
-#  path: /user_new
-#  controller: App\Controller\UserController::new
+user_new:
+  path: /user_new
+  controller: App\Controller\UserController::new
 
 #user_create:
 #  path: /user_create
-#  controller: App\Controller\SecurityController::userCreate
+#  controller: App\Controller\SecurityController::create
 #  methods: GET
 
 #user_form

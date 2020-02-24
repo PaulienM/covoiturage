@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\User;
+use Doctrine\DBAL\Types\ArrayType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -13,12 +14,12 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email')
-            ->add('roles')
             ->add('password')
             ->add('username')
             ->add('prenom')
             ->add('nom')
-            ->add('passagertrajets')
+         // ->add('roles', ArrayType::class )
+       //     ->add('passagertrajets')
         ;
     }
 
