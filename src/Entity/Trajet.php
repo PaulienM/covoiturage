@@ -96,6 +96,10 @@ class Trajet
     public function setConducteur(?user $conducteur): self
     {
         $this->conducteur = $conducteur;
+        if ($conducteur instanceof User && ! $conducteur->getTrajetConducteurs()->contains($this)
+        ) {
+            $conducteur->addTrajetConducteur($this);
+        }
 
         return $this;
     }
@@ -113,6 +117,9 @@ class Trajet
         if (!$this->passagers->contains($passager)) {
             $this->passagers[] = $passager;
         }
+        if (!$passager->getTrajetPassagers()->contains($this)) {
+            $passager->addTrajetPassager($this);
+        }
 
         return $this;
     }
@@ -121,6 +128,10 @@ class Trajet
     {
         if ($this->passagers->contains($passager)) {
             $this->passagers->removeElement($passager);
+
+            if ($passager->getTrajetPassagers()->contains($this)) {
+                $passager->removeTrajetPassager($this);
+            }
         }
 
         return $this;
