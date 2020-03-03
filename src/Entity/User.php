@@ -214,6 +214,9 @@ class User implements UserInterface
         if (!$this->trajetPassagers->contains($trajetPassagers)) {
             $this->trajetPassagers[] = $trajetPassagers;
         }
+        if (!$trajetPassagers->getPassagers()->contains($this)) {
+            $trajetPassagers->addPassager($this);
+        }
 
         return $this;
     }
@@ -222,6 +225,10 @@ class User implements UserInterface
     {
         if ($this->trajetPassagers->contains($trajetPassagers)) {
             $this->trajetPassagers->removeElement($trajetPassagers);
+
+            if ($trajetPassagers->getPassagers()->contains($this)) {
+                $trajetPassagers->removePassager($this);
+            }
         }
 
         return $this;
