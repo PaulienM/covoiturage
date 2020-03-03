@@ -12,9 +12,12 @@ class LieuTest extends TestCase
 {
     protected $lieu;
 
+    protected $trajet;
+
     public function setUp()
     {
         $this->lieu = new Lieu();
+        $this->trajet = new Trajet();
     }
 
     public function testLieu()
@@ -43,19 +46,39 @@ class LieuTest extends TestCase
 
     public function testDepartTrajet()
     {
-        $trajet = new Trajet();
-        $this->lieu->addDepartTrajet($trajet);
-        $this->assertContains($trajet, $this->lieu->getDepartTrajets());
-        $this->lieu->removeDepartTrajet($trajet);
-        $this->assertNotContains($trajet, $this->lieu->getDepartTrajets());
+        $this->lieu->addDepartTrajet($this->trajet);
+        $this->assertContains($this->trajet, $this->lieu->getDepartTrajets());
+        $this->lieu->removeDepartTrajet($this->trajet);
+        $this->assertNotContains($this->trajet, $this->lieu->getDepartTrajets());
     }
 
     public function testArriveeTrajet()
     {
-        $trajet = new Trajet();
-        $this->lieu->addArriveeTrajet($trajet);
-        $this->assertContains($trajet, $this->lieu->getArriveeTrajets());
-        $this->lieu->removeArriveeTrajet($trajet);
-        $this->assertNotContains($trajet, $this->lieu->getArriveeTrajets());
+        $this->lieu->addArriveeTrajet($this->trajet);
+        $this->assertContains($this->trajet, $this->lieu->getArriveeTrajets());
+        $this->lieu->removeArriveeTrajet($this->trajet);
+        $this->assertNotContains($this->trajet, $this->lieu->getArriveeTrajets());
+    }
+
+    public function testAddLieuInTrajet()
+    {
+        $this->lieu->addArriveeTrajet($this->trajet);
+        $this->assertEquals($this->lieu, $this->trajet->getLieuArrivee());
+
+        $this->lieu->addDepartTrajet($this->trajet);
+        $this->assertEquals($this->lieu, $this->trajet->getLieuDepart());
+    }
+
+    public function testRemoveLieuInTrajet()
+    {
+        $this->lieu->addArriveeTrajet($this->trajet);
+        $this->assertEquals($this->lieu, $this->trajet->getLieuArrivee());
+        $this->lieu->removeArriveeTrajet($this->trajet);
+        $this->assertNull($this->trajet->getLieuArrivee());
+
+        $this->lieu->addDepartTrajet($this->trajet);
+        $this->assertEquals($this->lieu, $this->trajet->getLieuDepart());
+        $this->lieu->removeDepartTrajet($this->trajet);
+        $this->assertNull($this->trajet->getLieuDepart());
     }
 }
