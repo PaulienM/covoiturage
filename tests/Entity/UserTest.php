@@ -88,4 +88,26 @@ class UserTest extends testCase
         $this->assertContains('ROLE_TEST', $this->user->getRoles());
         $this->assertContains('ROLE_USER', $this->user->getRoles());
     }
+
+    public function testAddUserInTrajet()
+    {
+        $this->user->addTrajetConducteur($this->trajet);
+        $this->assertEquals($this->user, $this->trajet->getConducteur());
+
+        $this->user->addTrajetPassager($this->trajet);
+        $this->assertContains($this->user, $this->trajet->getPassagers());
+    }
+
+    public function testRemoveUserInTrajet()
+    {
+        $this->user->addTrajetConducteur($this->trajet);
+        $this->assertEquals($this->user, $this->trajet->getConducteur());
+        $this->user->removeTrajetConducteur($this->trajet);
+        $this->assertNull($this->trajet->getConducteur());
+
+        $this->user->addTrajetPassager($this->trajet);
+        $this->assertContains($this->user, $this->trajet->getPassagers());
+        $this->user->removeTrajetPassager($this->trajet);
+        $this->assertNotContains($this->user, $this->trajet->getPassagers());
+    }
 }
