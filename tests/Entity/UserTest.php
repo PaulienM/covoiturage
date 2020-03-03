@@ -81,4 +81,11 @@ class UserTest extends testCase
         $this->user->removeTrajetPassager($this->trajet);
         $this->assertNotContains($this->trajet, $this->user->getTrajetPassagers());
     }
+
+    public function testRoles()
+    {
+        $this->user->setRoles(['ROLE_TEST']);
+        $this->assertContains('ROLE_TEST', $this->user->getRoles());
+        $this->assertContains('ROLE_USER', $this->user->getRoles());
+    }
 }
