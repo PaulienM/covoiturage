@@ -19,12 +19,12 @@ class Trajet
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="departtrajets")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="departTrajets")
      */
     private $lieuDepart;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="arriveetrajets")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="arriveeTrajets")
      */
     private $lieuArrivee;
 

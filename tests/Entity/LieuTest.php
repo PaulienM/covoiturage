@@ -4,6 +4,7 @@
 namespace App\Tests\Entity;
 
 
+use App\Entity\Trajet;
 use Monolog\Test\TestCase;
 use App\Entity\Lieu;
 
@@ -38,5 +39,23 @@ class LieuTest extends TestCase
     {
         $this->lieu->setLongitude(0.01);
         $this->assertEquals(0.01, $this->lieu->getLongitude());
+    }
+
+    public function testDepartTrajet()
+    {
+        $trajet = new Trajet();
+        $this->lieu->addDepartTrajet($trajet);
+        $this->assertContains($trajet, $this->lieu->getDepartTrajets());
+        $this->lieu->removeDepartTrajet($trajet);
+        $this->assertNotContains($trajet, $this->lieu->getDepartTrajets());
+    }
+
+    public function testArriveeTrajet()
+    {
+        $trajet = new Trajet();
+        $this->lieu->addArriveeTrajet($trajet);
+        $this->assertContains($trajet, $this->lieu->getArriveeTrajets());
+        $this->lieu->removeArriveeTrajet($trajet);
+        $this->assertNotContains($trajet, $this->lieu->getArriveeTrajets());
     }
 }

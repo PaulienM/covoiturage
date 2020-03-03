@@ -36,17 +36,17 @@ class Lieu
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="lieudepart")
      */
-    private $departtrajets;
+    private $departTrajets;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Lieu", mappedBy="lieuarrivee")
      */
-    private $arriveetrajets;
+    private $arriveeTrajets;
 
     public function __construct()
     {
-        $this->departtrajets = new ArrayCollection();
-        $this->arriveetrajets = new ArrayCollection();
+        $this->departTrajets = new ArrayCollection();
+        $this->arriveeTrajets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -90,57 +90,33 @@ class Lieu
         return $this;
     }
 
-    public function getLieudepart(): ?self
-    {
-        return $this->lieudepart;
-    }
-
-    public function setLieudepart(?self $lieudepart): self
-    {
-        $this->lieudepart = $lieudepart;
-
-        return $this;
-    }
-
     /**
      * @return Collection|self[]
      */
-    public function getDeparttrajets(): Collection
+    public function getDepartTrajets(): Collection
     {
-        return $this->departtrajets;
+        return $this->departTrajets;
     }
 
-    public function addDeparttrajet(Trajet $departtrajet): self
+    public function addDepartTrajet(Trajet $departTrajet): self
     {
-        if (!$this->departtrajets->contains($departtrajet)) {
-            $this->departtrajets[] = $departtrajet;
-            $departtrajet->setLieudepart($this);
+        if (!$this->departTrajets->contains($departTrajet)) {
+            $this->departTrajets[] = $departTrajet;
+            $departTrajet->setLieudepart($this);
         }
 
         return $this;
     }
 
-    public function removeDeparttrajet(Trajet $departtrajet): self
+    public function removeDepartTrajet(Trajet $departTrajet): self
     {
-        if ($this->departtrajets->contains($departtrajet)) {
-            $this->departtrajets->removeElement($departtrajet);
+        if ($this->departTrajets->contains($departTrajet)) {
+            $this->departTrajets->removeElement($departTrajet);
             // set the owning side to null (unless already changed)
-            if ($departtrajet->getLieudepart() === $this) {
-                $departtrajet->setLieudepart(null);
+            if ($departTrajet->getLieudepart() === $this) {
+                $departTrajet->setLieudepart(null);
             }
         }
-
-        return $this;
-    }
-
-    public function getLieuarrivee(): ?self
-    {
-        return $this->lieuarrivee;
-    }
-
-    public function setLieuarrivee(?self $lieuarrivee): self
-    {
-        $this->lieuarrivee = $lieuarrivee;
 
         return $this;
     }
@@ -148,28 +124,28 @@ class Lieu
     /**
      * @return Collection|Trajet[]
      */
-    public function getArriveetrajets(): Collection
+    public function getArriveeTrajets(): Collection
     {
-        return $this->arriveetrajets;
+        return $this->arriveeTrajets;
     }
 
-    public function addArriveetrajet(Trajet $arriveetrajet): self
+    public function addArriveeTrajet(Trajet $arriveeTrajet): self
     {
-        if (!$this->arriveetrajets->contains($arriveetrajet)) {
-            $this->arriveetrajets[] = $arriveetrajet;
-            $arriveetrajet->setLieuarrivee($this);
+        if (!$this->arriveeTrajets->contains($arriveeTrajet)) {
+            $this->arriveeTrajets[] = $arriveeTrajet;
+            $arriveeTrajet->setLieuarrivee($this);
         }
 
         return $this;
     }
 
-    public function removeArriveetrajet(Trajet $arriveetrajet): self
+    public function removeArriveeTrajet(Trajet $arriveeTrajet): self
     {
-        if ($this->arriveetrajets->contains($arriveetrajet)) {
-            $this->arriveetrajets->removeElement($arriveetrajet);
+        if ($this->arriveeTrajets->contains($arriveeTrajet)) {
+            $this->arriveeTrajets->removeElement($arriveeTrajet);
             // set the owning side to null (unless already changed)
-            if ($arriveetrajet->getLieuarrivee() === $this) {
-                $arriveetrajet->setLieuarrivee(null);
+            if ($arriveeTrajet->getLieuarrivee() === $this) {
+                $arriveeTrajet->setLieuarrivee(null);
             }
         }
 
