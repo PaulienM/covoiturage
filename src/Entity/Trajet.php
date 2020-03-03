@@ -19,12 +19,12 @@ class Trajet
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="departtrajets")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="departTrajets")
      */
     private $lieuDepart;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="arriveetrajets")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Lieu", inversedBy="arriveeTrajets")
      */
     private $lieuArrivee;
 
@@ -48,20 +48,9 @@ class Trajet
      */
     private $datetime;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="conducteurtrajets")
-     */
-    private $user;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="passagertrajets")
-     */
-    private $users;
-
     public function __construct()
     {
         $this->passagers = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -77,6 +66,9 @@ class Trajet
     public function setLieuDepart(?lieu $lieuDepart): self
     {
         $this->lieuDepart = $lieuDepart;
+        if ($lieuDepart instanceof Lieu) {
+            $lieuDepart->addDepartTrajet($this);
+        }
 
         return $this;
     }
@@ -89,6 +81,9 @@ class Trajet
     public function setLieuArrivee(?lieu $lieuArrivee): self
     {
         $this->lieuArrivee = $lieuArrivee;
+        if ($lieuArrivee instanceof Lieu) {
+            $lieuArrivee->addArriveeTrajet($this);
+        }
 
         return $this;
     }
@@ -101,6 +96,10 @@ class Trajet
     public function setConducteur(?user $conducteur): self
     {
         $this->conducteur = $conducteur;
+        if ($conducteur instanceof User && ! $conducteur->getTrajetConducteurs()->contains($this)
+        ) {
+            $conducteur->addTrajetConducteur($this);
+        }
 
         return $this;
     }
@@ -118,6 +117,9 @@ class Trajet
         if (!$this->passagers->contains($passager)) {
             $this->passagers[] = $passager;
         }
+        if (!$passager->getTrajetPassagers()->contains($this)) {
+            $passager->addTrajetPassager($this);
+        }
 
         return $this;
     }
@@ -126,6 +128,10 @@ class Trajet
     {
         if ($this->passagers->contains($passager)) {
             $this->passagers->removeElement($passager);
+
+            if ($passager->getTrajetPassagers()->contains($this)) {
+                $passager->removeTrajetPassager($this);
+            }
         }
 
         return $this;
@@ -151,46 +157,6 @@ class Trajet
     public function setDatetime(\DateTimeInterface $datetime): self
     {
         $this->datetime = $datetime;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addPassagertrajet($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            $user->removePassagertrajet($this);
-        }
 
         return $this;
     }
