@@ -10,7 +10,7 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {%  include 'navBar.html.twig' %}
+        {% include 'navBar.html.twig' %}
         {% block body %}{% endblock %}
         {% block javascripts %}
             <script src="{{ asset ("js/jquery/jquery.slim.min.js")}}"></script>
