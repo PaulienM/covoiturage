@@ -12,9 +12,12 @@ class TrajetTest extends TestCase
 {
     protected $trajet;
 
+    protected $lieu;
+
     public function setUp()
     {
         $this->trajet = new Trajet();
+        $this->lieu = new Lieu();
     }
 
     public function testTrajet()
@@ -38,20 +41,18 @@ class TrajetTest extends TestCase
 
     public function testTrajetLieuDepart()
     {
-        $lieu = new Lieu();
-        $this->trajet->setLieudepart($lieu);
-        $lieu->addDeparttrajet($this->trajet);
-        $this->assertEquals($lieu, $this->trajet->getLieuDepart());
-        $this->assertContains($this->trajet, $lieu->getDeparttrajets());
+        $this->trajet->setLieudepart($this->lieu);
+        $this->lieu->addDeparttrajet($this->trajet);
+        $this->assertEquals($this->lieu, $this->trajet->getLieuDepart());
+        $this->assertContains($this->trajet, $this->lieu->getDeparttrajets());
     }
 
     public function testTrajetLieuArrivee()
     {
-        $lieu = new Lieu();
-        $this->trajet->setLieuarrivee($lieu);
-        $lieu->addArriveetrajet($this->trajet);
-        $this->assertEquals($lieu, $this->trajet->getLieuarrivee());
-        $this->assertContains($this->trajet, $lieu->getArriveetrajets());
+        $this->trajet->setLieuarrivee($this->lieu);
+        $this->lieu->addArriveetrajet($this->trajet);
+        $this->assertEquals($this->lieu, $this->trajet->getLieuarrivee());
+        $this->assertContains($this->trajet, $this->lieu->getArriveetrajets());
     }
 
     public function testTrajetConducteur()
@@ -78,5 +79,14 @@ class TrajetTest extends TestCase
         $this->trajet->addPassager($user);
         $this->trajet->removePassager($user);
         $this->assertNotContains($user, $this->trajet->getPassagers());
+    }
+
+    public function testAddTrajetInLieu()
+    {
+        $this->trajet->setLieuDepart($this->lieu);
+        $this->assertContains($this->trajet, $this->lieu->getDepartTrajets());
+
+        $this->trajet->setLieuArrivee($this->lieu);
+        $this->assertContains($this->trajet, $this->lieu->getArriveeTrajets());
     }
 }
