@@ -66,6 +66,9 @@ class Trajet
     public function setLieuDepart(?lieu $lieuDepart): self
     {
         $this->lieuDepart = $lieuDepart;
+        if ($lieuDepart instanceof Lieu) {
+            $lieuDepart->addDepartTrajet($this);
+        }
 
         return $this;
     }
@@ -78,6 +81,9 @@ class Trajet
     public function setLieuArrivee(?lieu $lieuArrivee): self
     {
         $this->lieuArrivee = $lieuArrivee;
+        if ($lieuArrivee instanceof Lieu) {
+            $lieuArrivee->addArriveeTrajet($this);
+        }
 
         return $this;
     }
