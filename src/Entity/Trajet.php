@@ -48,20 +48,9 @@ class Trajet
      */
     private $datetime;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="conducteurtrajets")
-     */
-    private $user;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="passagertrajets")
-     */
-    private $users;
-
     public function __construct()
     {
         $this->passagers = new ArrayCollection();
-        $this->users = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -151,46 +140,6 @@ class Trajet
     public function setDatetime(\DateTimeInterface $datetime): self
     {
         $this->datetime = $datetime;
-
-        return $this;
-    }
-
-    public function getUser(): ?User
-    {
-        return $this->user;
-    }
-
-    public function setUser(?User $user): self
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addPassagertrajet($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            $user->removePassagertrajet($this);
-        }
 
         return $this;
     }
