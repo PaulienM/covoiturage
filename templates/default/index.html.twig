@@ -3,20 +3,8 @@
 {% block title %}Hello DefaultController!{% endblock %}
 
 {% block body %}
-
-<main role="main" class="container-fluid">
-    <div class="row">
-        <div class="col-md-10">
-            <div class="main-div">
-                <div class="col-md-12">
-{#                    {% if app.user %}#}
-                        <a href="{{ path("app_login") }}" >Login</a>
-{#                    {% endif %}#}
-                    <h1><i class="fa fa-car"></i> Bliblicar accueil</h1>
-                    <h2>Liste trajets</h2>
-                </div>
-            </div>
-        </div>
+    <div class="text-center">
+        <h1><i class="fa fa-car"></i> Bliblicar accueil</h1>
+        <h2>Liste trajets</h2>
     </div>
-</main>
 {% endblock %}
