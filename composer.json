@@ -1,4 +1,6 @@
 {
+    "name": "paulienm/covoiturage",
+    "description": "Application de covoiturage",
     "type": "project",
     "license": "proprietary",
     "require": {
